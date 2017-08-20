@@ -32,11 +32,6 @@ namespace HueApp
             Task.Run(() => FindBridge());
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         public void FindBridge()
         {
             bool successful = false;
@@ -142,6 +137,11 @@ namespace HueApp
                 Brightness = (byte)(BrightnessSlider.Value * 254.0 / 10.0)
             };
             await client.SendCommandAsync(command, new List<string> { light.Id });
+        }
+
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
