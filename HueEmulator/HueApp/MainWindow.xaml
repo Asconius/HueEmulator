@@ -1,0 +1,30 @@
+﻿<Window x:Class="HueApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HueApp"
+        mc:Ignorable="d"
+        Title="HueApp" Height="350" Width="525">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Exit" Click="MenuItem_Click" />
+                </MenuItem>
+            </Menu>
+            <DockPanel DockPanel.Dock="Bottom">
+                <ListView Width="100" Name="BridgeListView" SelectionChanged="BridgeListView_SelectionChanged">
+                </ListView>
+                <ListView Width="100" Name="LightListView" SelectionChanged="LightListView_SelectionChanged">
+                </ListView>
+                <StackPanel x:Name="ColorStackPanel" Visibility="Collapsed">
+                    <Slider x:Name="HueSlider" Margin="10"/>
+                    <Slider x:Name="SaturationSlider" Margin="10"/>
+                    <Slider x:Name="BrightnessSlider" Margin="10"/>
+                    <Button x:Name="ColorButton" Width="100" Margin="10" HorizontalAlignment="Left" Click="ColorButton_ClickAsync">Set Color</Button>
+                </StackPanel>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>
