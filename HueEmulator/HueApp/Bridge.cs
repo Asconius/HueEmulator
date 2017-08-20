@@ -1,19 +1,20 @@
 ﻿using Q42.HueApi;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HueApp
 {
-    class Bridge
+    public class Bridge
     {
-        private List<Light> lights = new List<Light>();
+        private ObservableCollection<Light> lights = new ObservableCollection<Light>();
         public string BridgeId { get; set; }
         public string IpAddress { get; set; }
 
-        public List<Light> Lights
+        public ObservableCollection<Light> Lights
         {
             get
             {

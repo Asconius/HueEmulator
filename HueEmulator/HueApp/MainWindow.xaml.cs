@@ -3,6 +3,7 @@ using Q42.HueApi.Interfaces;
 using Q42.HueApi.Models.Bridge;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +26,28 @@ namespace HueApp
     {
         private const string LocalHost = "127.0.0.1";
         private ILocalHueClient client;
-        private List<Bridge> bridges = new List<Bridge>();
+        private ViewModel model = new ViewModel();
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = model;
             Task.Run(() => FindBridge());
+        }
+
+        public ObservableCollection<Bridge> Bridges
+        {
+            get
+            {
+                return model.Bridges;
+            }
+        }
+
+        public ObservableCollection<Light> Lights
+        {
+            get
+            {
+                return model.Lights;
+            }
         }
 
         public void FindBridge()
@@ -72,20 +90,15 @@ namespace HueApp
                 {
                     IpAddress = LocalHost
                 };
-                bridges.Add(bridge);
-
                 Dispatcher.Invoke(() =>
                 {
-                    BridgeListView.Items.Clear();
-                    BridgeListView.Items.Add(bridge);
+                    model.Bridges.Add(bridge);
                 });
-
                 IEnumerable<Light> lights = await client.GetLightsAsync();
                 foreach (Light light in lights)
                 {
                     Console.WriteLine(light);
-                    LightDecorator lightDecorator = new LightDecorator(light);
-                    bridge.Lights.Add(lightDecorator);
+                    bridge.Lights.Add(light);
                 }
                 return true;
             }
@@ -94,47 +107,14 @@ namespace HueApp
             }
             return false;
         }
-
-        private void BridgeListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Bridge bridge = (Bridge)((ListBox)sender).SelectedItem;
-
-            if (bridge == null)
-            {
-                return;
-            }
-
-            LightListView.Items.Clear();
-            foreach (Light light in bridge.Lights)
-            {
-                LightListView.Items.Add(light);
-            }
-        }
-
-        private void LightListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            LightDecorator light = (LightDecorator)((ListBox)sender).SelectedItem;
-
-            if (light == null)
-            {
-                return;
-            }
-
-            ColorStackPanel.Visibility = Visibility.Visible;
-
-            HueSlider.Value = light.HueTrackBarValue;
-            SaturationSlider.Value = light.SaturationTrackBarValue;
-            BrightnessSlider.Value = light.BrightnessTrackBarValue;
-        }
-
         private async void ColorButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            LightDecorator light = (LightDecorator)LightListView.SelectedItem;
+            Light light = (Light) LightListView.SelectedItem;
             LightCommand command = new LightCommand()
             {
-                Hue = (int)(HueSlider.Value * 65535.0 / 10.0),
-                Saturation = (int)(SaturationSlider.Value * 254.0 / 10.0),
-                Brightness = (byte)(BrightnessSlider.Value * 254.0 / 10.0)
+                Hue = model.Hue,
+                Saturation = model.Saturation,
+                Brightness = model.Brightness
             };
             await client.SendCommandAsync(command, new List<string> { light.Id });
         }
