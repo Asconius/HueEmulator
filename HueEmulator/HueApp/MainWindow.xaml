@@ -10,30 +10,28 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:StateValueConverter x:Key="StateValueConverter"/>
     </Window.Resources>
-    <Grid>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem x:Name="ExitMenuItem" Header="_Exit" Click="ExitMenuItem_Click" />
-                </MenuItem>
-            </Menu>
-            <DockPanel DockPanel.Dock="Bottom">
-                <ListView Width="100" Name="BridgeListView" ItemsSource="{Binding Bridges}" SelectedItem="{Binding SelectedBridge}" >
-                </ListView>
-                <ListView Width="100" Name="LightListView" ItemsSource="{Binding Lights}" SelectedItem="{Binding SelectedLight}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding State, Converter={StaticResource StateValueConverter}}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <StackPanel x:Name="ColorStackPanel" Visibility="{Binding Path=Visible, Converter={StaticResource BooleanToVisibilityConverter} }">
-                    <Slider x:Name="HueSlider" Margin="10" Value="{Binding HueSliderValue}"/>
-                    <Slider x:Name="SaturationSlider" Margin="10" Value="{Binding SaturationSliderValue}"/>
-                    <Slider x:Name="BrightnessSlider" Margin="10" Value="{Binding BrightnessSliderValue}"/>
-                    <Button x:Name="ColorButton" Width="100" Margin="10" HorizontalAlignment="Left" Click="ColorButton_ClickAsync">Set Color</Button>
-                </StackPanel>
-            </DockPanel>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem x:Name="ExitMenuItem" Header="_Exit" Click="ExitMenuItem_Click"/>
+            </MenuItem>
+        </Menu>
+        <DockPanel DockPanel.Dock="Bottom">
+            <ListView Width="100" Name="BridgeListView" ItemsSource="{Binding Bridges}" SelectedItem="{Binding SelectedBridge}" >
+            </ListView>
+            <ListView Width="100" Name="LightListView" ItemsSource="{Binding Lights}" SelectedItem="{Binding SelectedLight}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding State, Converter={StaticResource StateValueConverter}}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel x:Name="ColorStackPanel" Visibility="{Binding Path=Visible, Converter={StaticResource BooleanToVisibilityConverter} }">
+                <Slider x:Name="HueSlider" Margin="10" Value="{Binding HueSliderValue}"/>
+                <Slider x:Name="SaturationSlider" Margin="10" Value="{Binding SaturationSliderValue}"/>
+                <Slider x:Name="BrightnessSlider" Margin="10" Value="{Binding BrightnessSliderValue}"/>
+                <Button x:Name="ColorButton" Width="100" Margin="10" HorizontalAlignment="Left" Click="ColorButton_ClickAsync">Set Color</Button>
+            </StackPanel>
         </DockPanel>
-    </Grid>
+    </DockPanel>
 </Window>

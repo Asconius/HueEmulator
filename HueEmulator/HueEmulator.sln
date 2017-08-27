@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HueApp", "HueApp\HueApp.csproj", "{CDE8D89E-1AF7-4080-8F54-A0E0322580CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HueEmulator", "HueEmulator\HueEmulator.csproj", "{AC803685-DBCC-492B-A0FC-6311DA623001}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CDE8D89E-1AF7-4080-8F54-A0E0322580CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDE8D89E-1AF7-4080-8F54-A0E0322580CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDE8D89E-1AF7-4080-8F54-A0E0322580CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC803685-DBCC-492B-A0FC-6311DA623001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC803685-DBCC-492B-A0FC-6311DA623001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC803685-DBCC-492B-A0FC-6311DA623001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC803685-DBCC-492B-A0FC-6311DA623001}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
