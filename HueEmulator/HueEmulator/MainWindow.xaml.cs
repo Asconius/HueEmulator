@@ -194,18 +194,18 @@ namespace HueEmulator
         {
             Log("Stopping server...");
             httpListener.Stop();
-            try
-            {
-                thread.Abort();
-            }
-            catch (Exception)
-            {
-            }
+            thread.Abort();
         }
 
         private void ClearMenuItem_Click(object sender, RoutedEventArgs e)
         {
             model.Text = String.Empty;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            httpListener.Stop();
+            thread.Abort();
         }
     }
 }
